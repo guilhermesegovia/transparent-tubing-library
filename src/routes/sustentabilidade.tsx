@@ -1,0 +1,4 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { SustainabilityContent, PageIntro, projectHead } from "@/components/project-content";
+export const Route = createFileRoute("/sustentabilidade")({ head: () => projectHead("Sustentabilidade | Reutilização da Água da Chuva", "Entenda a importância de reaproveitar a água da chuva, reduzir desperdícios e inspirar um futuro mais sustentável pela educação."), component: SustainabilityPage });
+function SustainabilityPage() { return <main><PageIntro label="SUSTENTABILIDADE" title="Pequenas atitudes. Novos futuros." description="Reaproveitar a água da chuva é uma forma de cuidar dos recursos naturais e inspirar hábitos mais conscientes." /><div className="site-container"><SustainabilityContent /></div></main>; }

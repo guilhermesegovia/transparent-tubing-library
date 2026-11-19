@@ -1,0 +1,4 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { FunctioningContent, PageIntro, projectHead } from "@/components/project-content";
+export const Route = createFileRoute("/funcionamento")({ head: () => projectHead("Como funciona | Reutilização da Água da Chuva", "Entenda as quatro etapas da proposta: captação, filtragem, armazenamento e reutilização da água da chuva para usos não potáveis."), component: FunctioningPage });
+function FunctioningPage() { return <main><PageIntro label="COMO FUNCIONA" title="O caminho de cada gota." description="Da chuva ao reaproveitamento: quatro etapas que transformam uma ideia sustentável em uma demonstração visual." /><section className="page-content"><div className="site-container"><FunctioningContent /></div></section></main>; }

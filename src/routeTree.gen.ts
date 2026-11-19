@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ComponentesRouteImport } from './routes/componentes'
+import { Route as FuncionamentoRouteImport } from './routes/funcionamento'
+import { Route as GaleriaRouteImport } from './routes/galeria'
+import { Route as ProjetoRouteImport } from './routes/projeto'
+import { Route as SustentabilidadeRouteImport } from './routes/sustentabilidade'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComponentesRoute = ComponentesRouteImport.update({
+  id: '/componentes',
+  path: '/componentes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FuncionamentoRoute = FuncionamentoRouteImport.update({
+  id: '/funcionamento',
+  path: '/funcionamento',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GaleriaRoute = GaleriaRouteImport.update({
+  id: '/galeria',
+  path: '/galeria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjetoRoute = ProjetoRouteImport.update({
+  id: '/projeto',
+  path: '/projeto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SustentabilidadeRoute = SustentabilidadeRouteImport.update({
+  id: '/sustentabilidade',
+  path: '/sustentabilidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/componentes': typeof ComponentesRoute
+  '/funcionamento': typeof FuncionamentoRoute
+  '/galeria': typeof GaleriaRoute
+  '/projeto': typeof ProjetoRoute
+  '/sustentabilidade': typeof SustentabilidadeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/componentes': typeof ComponentesRoute
+  '/funcionamento': typeof FuncionamentoRoute
+  '/galeria': typeof GaleriaRoute
+  '/projeto': typeof ProjetoRoute
+  '/sustentabilidade': typeof SustentabilidadeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/componentes': typeof ComponentesRoute
+  '/funcionamento': typeof FuncionamentoRoute
+  '/galeria': typeof GaleriaRoute
+  '/projeto': typeof ProjetoRoute
+  '/sustentabilidade': typeof SustentabilidadeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/componentes'
+    | '/funcionamento'
+    | '/galeria'
+    | '/projeto'
+    | '/sustentabilidade'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/componentes'
+    | '/funcionamento'
+    | '/galeria'
+    | '/projeto'
+    | '/sustentabilidade'
+  id:
+    | '__root__'
+    | '/'
+    | '/componentes'
+    | '/funcionamento'
+    | '/galeria'
+    | '/projeto'
+    | '/sustentabilidade'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ComponentesRoute: typeof ComponentesRoute
+  FuncionamentoRoute: typeof FuncionamentoRoute
+  GaleriaRoute: typeof GaleriaRoute
+  ProjetoRoute: typeof ProjetoRoute
+  SustentabilidadeRoute: typeof SustentabilidadeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/componentes': {
+      id: '/componentes'
+      path: '/componentes'
+      fullPath: '/componentes'
+      preLoaderRoute: typeof ComponentesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/funcionamento': {
+      id: '/funcionamento'
+      path: '/funcionamento'
+      fullPath: '/funcionamento'
+      preLoaderRoute: typeof FuncionamentoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galeria': {
+      id: '/galeria'
+      path: '/galeria'
+      fullPath: '/galeria'
+      preLoaderRoute: typeof GaleriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projeto': {
+      id: '/projeto'
+      path: '/projeto'
+      fullPath: '/projeto'
+      preLoaderRoute: typeof ProjetoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sustentabilidade': {
+      id: '/sustentabilidade'
+      path: '/sustentabilidade'
+      fullPath: '/sustentabilidade'
+      preLoaderRoute: typeof SustentabilidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ComponentesRoute: ComponentesRoute,
+  FuncionamentoRoute: FuncionamentoRoute,
+  GaleriaRoute: GaleriaRoute,
+  ProjetoRoute: ProjetoRoute,
+  SustentabilidadeRoute: SustentabilidadeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

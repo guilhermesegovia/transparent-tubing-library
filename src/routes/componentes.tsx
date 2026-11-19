@@ -1,0 +1,4 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { ComponentsContent, PageIntro, projectHead } from "@/components/project-content";
+export const Route = createFileRoute("/componentes")({ head: () => projectHead("Componentes | Reutilização da Água da Chuva", "Conheça os materiais da maquete: Arduino, sensores ultrassônicos, reservatórios, bombas, tubulações, filtro e componentes eletrônicos."), component: ComponentsPage });
+function ComponentsPage() { return <main><PageIntro label="COMPONENTES" title="As peças que dão vida à ideia." description="Materiais e componentes que conectam eletrônica, construção e sustentabilidade no nosso projeto." /><section className="page-content"><div className="site-container"><ComponentsContent /></div></section></main>; }

@@ -1,0 +1,4 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { Gallery, PageIntro, projectHead } from "@/components/project-content";
+export const Route = createFileRoute("/galeria")({ head: () => projectHead("Galeria da maquete | Reutilização da Água da Chuva", "Fotografias reais da maquete escolar: visão geral, telhado, reservatórios e componentes eletrônicos do projeto."), component: GalleryPage });
+function GalleryPage() { return <main><PageIntro label="GALERIA DO PROJETO" title="Nosso projeto, de perto." description="Registros reais da maquete. Da construção da casa às conexões eletrônicas, cada detalhe faz parte desse aprendizado." /><section className="page-content"><div className="site-container"><Gallery full /></div></section></main>; }

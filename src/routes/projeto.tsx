@@ -1,0 +1,4 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { AboutSection, PageIntro, projectHead } from "@/components/project-content";
+export const Route = createFileRoute("/projeto")({ head: () => projectHead("O projeto | Reutilização da Água da Chuva", "A proposta e os objetivos da maquete escolar que une tecnologia, eletrônica e reaproveitamento da água da chuva."), component: ProjectPage });
+function ProjectPage() { return <main><PageIntro label="O PROJETO" title="Uma ideia sustentável, na prática." description="Uma maquete para demonstrar um novo caminho para a água da chuva e incentivar o uso consciente dos recursos naturais." /><section className="section"><div className="site-container"><AboutSection full /></div></section></main>; }

@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project architecture
+- Keep informational sections in separate TanStack content routes with a shared root header and footer so navigation and page metadata remain consistent.
+- Store uploaded project media as Lovable Assets JSON pointers and centralize the photo collection so photographs can be replaced without editing each page.
+- Keep the portfolio browser-only and informational, with no persistence or server functions, because it presents an educational model rather than a transactional service.
+- Define all visual roles and responsive layouts in the global design system and use the shared Button variants for controls so the presentation stays coherent.
