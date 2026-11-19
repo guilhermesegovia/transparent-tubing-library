@@ -99,6 +99,27 @@
   --water: oklch(0.57 0.105 231);
   --leaf: oklch(0.78 0.15 146);
   --hero-foreground: oklch(0.99 0.003 160);
+  --sim-sky: oklch(0.95 0.025 225);
+  --sim-sky-rain: oklch(0.86 0.02 240);
+  --sim-cloud: oklch(0.99 0.004 240);
+  --sim-cloud-rain: oklch(0.7 0.02 250);
+  --sim-ground: oklch(0.6 0.12 148);
+  --sim-wall: oklch(0.96 0.012 90);
+  --sim-interior: oklch(0.84 0.04 72);
+  --sim-roof: oklch(0.8 0.13 84);
+  --sim-solar: oklch(0.33 0.08 265);
+  --sim-wood: oklch(0.5 0.05 50);
+  --sim-pipe: oklch(0.9 0.02 220 / 75%);
+  --sim-glass: oklch(0.93 0.03 215 / 55%);
+  --sim-glass-edge: oklch(0.6 0.04 220);
+  --sim-board: oklch(0.45 0.15 262);
+  --sim-relay: oklch(0.55 0.15 250);
+  --sim-wire: oklch(0.42 0.02 250 / 55%);
+  --sim-breadboard: oklch(0.98 0.004 90);
+  --led-red: oklch(0.63 0.22 27);
+  --led-blue: oklch(0.62 0.17 250);
+  --led-green: oklch(0.74 0.19 145);
+  --led-off: oklch(0.82 0.01 250);
   --hero-shade: oklch(0.19 0.039 167);
   --hero-gradient: linear-gradient(90deg, color-mix(in oklab, var(--hero-shade) 94%, transparent) 0%, color-mix(in oklab, var(--hero-shade) 78%, transparent) 36%, color-mix(in oklab, var(--hero-shade) 15%, transparent) 72%, color-mix(in oklab, var(--hero-shade) 5%, transparent));
   --overlay: oklch(0.16 0.02 165 / 92%);
@@ -273,10 +294,99 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .lightbox-controls { display: flex; gap: 20px; align-items: center; }
 .lightbox-close { position: absolute; top: 0; right: 0; }
 .lightbox-count { font-size: 12px; min-width: 40px; text-align: center; }
+.simulation-block { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--border); }
+.simulation-block h2 { font-weight: 700; font-size: 32px; line-height: 1.25; margin: 0 0 14px; }
+.simulation-intro { max-width: 680px; font-size: 14px; line-height: 1.9; color: var(--muted-foreground); margin: 0 0 28px; }
+.sim-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 28px; align-items: start; }
+.sim-stage { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: var(--card); }
+.sim-drawing { display: block; width: 100%; height: auto; }
+.sim-panel { display: flex; flex-direction: column; gap: 20px; }
+.sim-controls { display: flex; flex-direction: column; gap: 10px; }
+.sim-controls-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.sim-controls-row > * { flex: 1; }
+.sim-message { margin: 0; padding: 14px 16px; border-left: 3px solid var(--water); background: var(--muted); font-size: 13px; line-height: 1.7; min-height: 92px; }
+.sim-level-head { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; margin-bottom: 7px; }
+.sim-bar { height: 10px; border-radius: 99px; background: var(--muted); overflow: hidden; }
+.sim-bar span { display: block; height: 100%; background: var(--water); border-radius: inherit; }
+.sim-level-row small { display: block; margin-top: 6px; font-size: 11px; color: var(--muted-foreground); }
+.sim-status { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
+.sim-status li { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+.sim-status strong { font-weight: 600; color: var(--muted-foreground); }
+.sim-status .is-on strong { color: var(--primary); }
+.sim-status-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--led-off); }
+.sim-status .is-on .sim-status-dot { background: var(--primary); box-shadow: 0 0 0 4px color-mix(in oklab, var(--primary) 18%, transparent); }
+.sim-led-legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 11px; color: var(--muted-foreground); }
+.sim-led-legend li { display: flex; align-items: center; gap: 10px; }
+.sim-led-legend span { width: 12px; height: 12px; border-radius: 50%; background: var(--led-off); }
+.sim-led-legend .is-on { color: var(--foreground); font-weight: 600; }
+.sim-led-legend .sim-led-red.is-on span { background: var(--led-red); }
+.sim-led-legend .sim-led-blue.is-on span { background: var(--led-blue); }
+.sim-led-legend .sim-led-green.is-on span { background: var(--led-green); }
+.sim-sky { fill: var(--sim-sky); transition: fill 600ms ease; }
+.sim-sky.is-raining { fill: var(--sim-sky-rain); }
+.sim-cloud ellipse { fill: var(--sim-cloud); transition: fill 600ms ease; }
+.sim-cloud.is-raining ellipse { fill: var(--sim-cloud-rain); }
+.sim-drop { stroke: var(--water); stroke-width: 2; stroke-linecap: round; animation: sim-rain 0.9s linear infinite; }
+.sim-drop-short { animation-duration: 0.6s; }
+.sim-ground { fill: var(--sim-ground); }
+.sim-wall { fill: var(--sim-wall); stroke: var(--sim-glass-edge); stroke-width: 1; }
+.sim-interior { fill: var(--sim-interior); }
+.sim-roof { fill: var(--sim-roof); stroke: var(--sim-wood); stroke-width: 2; stroke-linejoin: round; }
+.sim-solar { fill: var(--sim-solar); }
+.sim-gutter { fill: var(--sim-pipe); stroke: var(--sim-glass-edge); stroke-width: 1.5; }
+.sim-pipe { fill: none; stroke: var(--sim-pipe); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+.sim-flow { fill: none; stroke: var(--water); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 10 12; opacity: 0; transition: opacity 300ms ease; animation: sim-flow 0.8s linear infinite; }
+.sim-flow.is-flowing { opacity: 1; }
+.sim-roof-flow { stroke-width: 3; }
+.sim-glass { fill: var(--sim-glass); }
+.sim-glass-edge { fill: none; stroke: var(--sim-glass-edge); stroke-width: 2; }
+.sim-water { fill: var(--water); opacity: 0.8; }
+.sim-level { font-size: 15px; font-weight: 700; fill: var(--foreground); }
+.sim-label { font-size: 12px; font-weight: 700; fill: var(--foreground); }
+.sim-label-ground, .sim-label-tag { fill: var(--hero-foreground); }
+.sim-label-tag { fill: var(--foreground); }
+.sim-small { font-size: 10px; font-weight: 600; fill: var(--foreground); }
+.sim-sensor-board { fill: var(--sim-board); }
+.sim-sensor-eye { fill: var(--sim-breadboard); stroke: var(--sim-glass-edge); }
+.sim-waves { fill: none; stroke: var(--sim-glass-edge); stroke-width: 2; stroke-linecap: round; animation: sim-pulse 1.4s ease-in-out infinite; }
+.sim-sensor.is-triggered .sim-waves { stroke: var(--primary); stroke-width: 2.5; animation-duration: 0.7s; }
+.sim-sensor.is-triggered .sim-sensor-board { fill: var(--primary); }
+.sim-board { fill: var(--sim-board); }
+.sim-chip { fill: var(--foreground); }
+.sim-board-label { font-size: 12px; font-weight: 700; fill: var(--hero-foreground); }
+.sim-relay { fill: var(--sim-relay); transition: fill 200ms ease; }
+.sim-relay.is-on { fill: var(--primary); }
+.sim-relay-light { fill: var(--led-off); }
+.sim-relay-light.is-on { fill: var(--led-red); }
+.sim-breadboard { fill: var(--sim-breadboard); stroke: var(--border); }
+.sim-led-core { fill: var(--led-off); transition: fill 200ms ease; }
+.sim-led-glow { fill: transparent; transition: fill 200ms ease; }
+.sim-led-red.is-on .sim-led-core { fill: var(--led-red); }
+.sim-led-red.is-on .sim-led-glow { fill: color-mix(in oklab, var(--led-red) 30%, transparent); }
+.sim-led-blue.is-on .sim-led-core { fill: var(--led-blue); }
+.sim-led-blue.is-on .sim-led-glow { fill: color-mix(in oklab, var(--led-blue) 30%, transparent); }
+.sim-led-green.is-on .sim-led-core { fill: var(--led-green); }
+.sim-led-green.is-on .sim-led-glow { fill: color-mix(in oklab, var(--led-green) 30%, transparent); }
+.sim-wire { fill: none; stroke: var(--sim-wire); stroke-width: 1.5; }
+.sim-signal { fill: none; stroke: var(--leaf); stroke-width: 2.5; stroke-dasharray: 4 10; opacity: 0; animation: sim-flow 0.6s linear infinite; }
+.sim-signal.is-active { opacity: 1; }
+.sim-pump-body { fill: var(--sim-wall); stroke: var(--sim-glass-edge); stroke-width: 2; }
+.sim-pump.is-on .sim-pump-body { stroke: var(--primary); stroke-width: 3; }
+.sim-rotor { transform-box: fill-box; transform-origin: center; }
+.sim-rotor circle { fill: var(--muted); stroke: var(--sim-glass-edge); stroke-width: 1.5; }
+.sim-rotor line { stroke: var(--sim-glass-edge); stroke-width: 2; }
+.sim-pump.is-on .sim-rotor { animation: sim-spin 0.6s linear infinite; }
+.sim-stand rect { fill: var(--sim-wood); }
+.sim-stand line { stroke: var(--sim-wood); stroke-width: 6; stroke-linecap: round; }
+.sim-plants circle { fill: var(--leaf); }
+@keyframes sim-flow { to { stroke-dashoffset: -44; } }
+@keyframes sim-rain { from { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } to { transform: translateY(125px); opacity: 0.2; } }
+@keyframes sim-pulse { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+@keyframes sim-spin { to { transform: rotate(360deg); } }
 @keyframes arrive { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 @media (min-width: 1600px) { .hero-photo { object-position: center 52%; } }
 @media (max-width: 1050px) { .desktop-nav { gap: 16px; } .nav-link { font-size: 11px; } .about-grid { gap: 40px; } .ribbon-item { padding-inline: 18px; } }
-@media (max-width: 1050px) { .components-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 1050px) { .components-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .sim-layout { grid-template-columns: 1fr; } }
 @media (max-width: 760px) {
   .site-container { width: calc(100% - 40px); }
   .site-header { height: 76px; }
@@ -319,5 +429,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .gallery-full .gallery-grid { gap: 24px 14px; }
   .gallery-full .gallery-button img { height: 230px; }
   .lightbox-content { inset: 20px; }
+  .simulation-block { margin-top: 44px; padding-top: 36px; }
+  .simulation-block h2 { font-size: 26px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }

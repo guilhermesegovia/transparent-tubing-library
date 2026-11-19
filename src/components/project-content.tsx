@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, CloudRain, Droplets, Filter, Waves, Leaf, Camera, Maximize2, Menu, X, Cpu, Radio, Container, Gauge, Sprout, Check, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { RainSimulation } from "@/components/rain-simulation";
 import overview from "@/assets/maquete-visao-geral.jpg.asset.json";
 import roof from "@/assets/maquete-telhado.jpg.asset.json";
 import reservoir from "@/assets/maquete-reservatorios.jpg.asset.json";
@@ -72,7 +73,7 @@ export function SustainabilityBand() {
 }
 
 export function FunctioningContent() {
-  return <><div className="steps-grid">{steps.map((step, i) => <article className="step" key={step.title}><div className="step-top"><step.icon size={38} strokeWidth={1.5} /><span>0{i + 1}</span></div><h2>{step.title}</h2><p>{step.description}</p></article>)}</div><div className="water-notice"><Info size={21} /><span>A filtragem apresentada não torna a água potável. O reaproveitamento é destinado a atividades que não exigem água para consumo humano.</span></div><figure className="m-0 mt-10"><img src={photos[2].src} alt={photos[2].alt} className="about-photo" loading="lazy" /><figcaption className="photo-caption"><Camera size={12} /> Reservatórios e componentes do sistema na maquete.</figcaption></figure></>;
+  return <><div className="steps-grid">{steps.map((step, i) => <article className="step" key={step.title}><div className="step-top"><step.icon size={38} strokeWidth={1.5} /><span>0{i + 1}</span></div><h2>{step.title}</h2><p>{step.description}</p></article>)}</div><RainSimulation /><div className="water-notice"><Info size={21} /><span>A filtragem apresentada não torna a água potável. O reaproveitamento é destinado a atividades que não exigem água para consumo humano.</span></div><figure className="m-0 mt-10"><img src={photos[2].src} alt={photos[2].alt} className="about-photo" loading="lazy" /><figcaption className="photo-caption"><Camera size={12} /> Reservatórios e componentes do sistema na maquete.</figcaption></figure></>;
 }
 
 const materials: { icon: typeof Cpu; name: string; text: string; photo?: { src: string; alt: string } }[] = [
