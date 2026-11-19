@@ -5,5 +5,5 @@
 - [x] Identificar integrantes — Guilherme Machado Segovia, Micaeli Alves de Sa, Mariane Correia Ferreira.
 - [x] Identificar instituição — Escola Técnica Adélia.
 - [x] Foto da mangueira de silicone em "Tubulações transparentes".
-- [ ] Reenviar as quatro fotos da maquete (ficaram no projeto anterior e não abrem aqui) e completar fotos de filtragem e LEDs. Bloqueio: fotos do usuário.
-- [ ] Completar espaço individual para fotografias de cada componente e reconferir todas as páginas.
+- [x] Fotos da maquete reenviadas e colocadas no site (início, galeria, funcionamento, componentes).
+- [x] Componentes: removidos sistema de filtragem, LEDs indicadores e componentes eletrônicos auxiliares; todos os cartões têm foto.
