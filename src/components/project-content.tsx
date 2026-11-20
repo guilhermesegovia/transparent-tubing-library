@@ -4,21 +4,14 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, CloudRain, Droplets, Filter, Waves, Leaf, Camera, Maximize2, Menu, X, Cpu, Radio, Container, Gauge, Sprout, Check, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RainSimulation } from "@/components/rain-simulation";
-import overview from "@/assets/maquete-visao-geral.jpg.asset.json";
-import roof from "@/assets/maquete-telhado.jpg.asset.json";
-import reservoir from "@/assets/maquete-reservatorios.jpg.asset.json";
-import electronics from "@/assets/maquete-eletronica.jpg.asset.json";
-import siliconeHose from "@/assets/mangueira-silicone.jpg.asset.json";
-import elevatedTank from "@/assets/maquete-caixa-elevada.jpg.asset.json";
-import openHouse from "@/assets/maquete-casa-aberta.jpg.asset.json";
 
 export const photos = [
-  { src: overview.url, title: "A maquete completa", description: "Visão geral da casa e do reservatório.", alt: "Vista frontal da maquete com casa, jardim e reservatório elevado" },
-  { src: roof.url, title: "Cada detalhe conta", description: "Construção da casa e o telhado com placa solar.", alt: "Casa da maquete com telhado amarelo e uma pequena placa solar" },
-  { src: reservoir.url, title: "O sistema em detalhe", description: "Reservatórios, sensores e bomba hidráulica.", alt: "Reservatórios transparentes, sensores ultrassônicos e bomba ao lado da casa" },
-  { src: electronics.url, title: "Tecnologia por dentro", description: "Arduino e conexões no interior da maquete.", alt: "Interior da maquete com placa Arduino Uno, protoboard, relé e conexões" },
-  { src: elevatedTank.url, title: "Reservatório elevado", description: "Caixa d'água sobre a estrutura de madeira, com sensor de nível.", alt: "Reservatório transparente sobre estrutura de madeira ao lado da casa, com sensor ultrassônico" },
-  { src: openHouse.url, title: "Casa aberta", description: "A eletrônica escondida dentro da casa, ao lado do jardim.", alt: "Casa da maquete aberta mostrando o Arduino e a protoboard, com o gramado ao lado" },
+  { src: "/fotos/maquete-visao-geral.jpg", title: "A maquete completa", description: "Visão geral da casa e do reservatório.", alt: "Vista frontal da maquete com casa, jardim e reservatório elevado" },
+  { src: "/fotos/maquete-telhado.jpg", title: "Cada detalhe conta", description: "Construção da casa e o telhado com placa solar.", alt: "Casa da maquete com telhado amarelo e uma pequena placa solar" },
+  { src: "/fotos/maquete-reservatorios.jpg", title: "O sistema em detalhe", description: "Reservatórios, sensores e bomba hidráulica.", alt: "Reservatórios transparentes, sensores ultrassônicos e bomba ao lado da casa" },
+  { src: "/fotos/maquete-eletronica.jpg", title: "Tecnologia por dentro", description: "Arduino e conexões no interior da maquete.", alt: "Interior da maquete com placa Arduino Uno, protoboard, relé e conexões" },
+  { src: "/fotos/maquete-caixa-elevada.jpg", title: "Reservatório elevado", description: "Caixa d'água sobre a estrutura de madeira, com sensor de nível.", alt: "Reservatório transparente sobre estrutura de madeira ao lado da casa, com sensor ultrassônico" },
+  { src: "/fotos/maquete-casa-aberta.jpg", title: "Casa aberta", description: "A eletrônica escondida dentro da casa, ao lado do jardim.", alt: "Casa da maquete aberta mostrando o Arduino e a protoboard, com o gramado ao lado" },
 ] as const;
 
 const navigation = [
@@ -81,7 +74,7 @@ const materials: { icon: typeof Cpu; name: string; text: string; photo?: { src: 
   { icon: Radio, name: "Sensores ultrassônicos de nível", text: "Sensores destinados à leitura do nível de água nos reservatórios.", photo: photos[2] },
   { icon: Container, name: "Reservatórios de água", text: "Recipientes que recebem e armazenam a água durante a demonstração.", photo: photos[4] },
   { icon: Gauge, name: "Bombas hidráulicas", text: "Componentes responsáveis pela movimentação da água no sistema.", photo: photos[2] },
-  { icon: Waves, name: "Tubulações transparentes", text: "Mangueiras de silicone transparentes que conduzem a água entre as etapas e permitem observar seu percurso.", photo: { src: siliconeHose.url, alt: "Mangueira de silicone transparente Soma MS-3M, com 3 metros de comprimento, enrolada" } },
+  { icon: Waves, name: "Tubulações transparentes", text: "Mangueiras de silicone transparentes que conduzem a água entre as etapas e permitem observar seu percurso.", photo: { src: "/fotos/mangueira-silicone.jpg", alt: "Mangueira de silicone transparente Soma MS-3M, com 3 metros de comprimento, enrolada" } },
 ];
 
 export function ComponentsContent() {
